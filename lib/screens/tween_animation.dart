@@ -28,14 +28,14 @@ class _TweenAnimationExampleState extends State<TweenAnimationExample> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width*0.8,
+              width: MediaQuery.of(context).size.width,
               child: TweenAnimationBuilder<double>(
                   tween: Tween(begin: 1, end: _scale),
                   duration: Duration(milliseconds: 600),
                   builder: (context, value, child) {
                     return Transform.scale(scale: value, child: child,);
                   },
-                  child: CustomText('🍑', size: 50)),
+                  child: CustomText('🍑', size: 20)),
             ),
               SizedBox(height: 20,),
               Slider.adaptive(value: _scale,
