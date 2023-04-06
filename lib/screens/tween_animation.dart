@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animations_themes_custom_painter/widgets/custom_text.dart';
@@ -11,7 +10,7 @@ class TweenAnimationExample extends StatefulWidget {
 }
 
 class _TweenAnimationExampleState extends State<TweenAnimationExample> {
-  var _angle = 0.0;
+  var _scale = 1.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,19 +22,29 @@ class _TweenAnimationExampleState extends State<TweenAnimationExample> {
         title: Text('Transform Widget', style: TextStyle(color: Colors.black)),
       ),
       body: Container(
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomText('🍑', size: 120),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*0.8,
+              child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 1, end: _scale),
+                  duration: Duration(milliseconds: 600),
+                  builder: (context, value, child) {
+                    return Transform.scale(scale: value, child: child,);
+                  },
+                  child: CustomText('🍑', size: 50)),
+            ),
               SizedBox(height: 20,),
-              Slider.adaptive(value: _angle, 
-              max: 180,
-              min: 0,
+              Slider.adaptive(value: _scale,
+              max: 5,
+              min: 1,
               onChanged: (value){
                 setState(() {
-                _angle = value;
-                  
+                _scale = value;
+
                 });
               })
           ],
